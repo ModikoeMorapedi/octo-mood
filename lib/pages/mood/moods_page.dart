@@ -5,10 +5,12 @@ import 'package:octo_mood/pages/mood/mood_status.dart';
 import 'package:octo_mood/services/database_service.dart';
 import 'package:octo_mood/utils/colors_util.dart';
 import 'package:octo_mood/utils/data_util.dart';
+import 'package:octo_mood/utils/strings_util.dart';
 
 class MoodsPage extends StatefulWidget {
   final String? id;
-  const MoodsPage({Key? key, this.id}) : super(key: key);
+  List<String>? userMoodsList = [];
+  MoodsPage({Key? key, this.id, this.userMoodsList}) : super(key: key);
 
   @override
   State<MoodsPage> createState() => _MoodsPageState();
@@ -18,6 +20,7 @@ class _MoodsPageState extends State<MoodsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: Container(
         height: MediaQuery.of(context).size.height,
         padding: const EdgeInsets.only(left: 30, right: 30, top: 50),
@@ -25,7 +28,14 @@ class _MoodsPageState extends State<MoodsPage> {
         child: Column(
           children: [
             //Heading
-
+            Container(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                  onPressed: (() {
+                    Navigator.pushNamed(context, StringsUtil.settingsPage);
+                  }),
+                  icon: const Icon(Icons.settings)),
+            ),
             const Center(
               child: Text("👀 Whats Your Mood Today 👀",
                   style: TextStyle(
@@ -36,7 +46,9 @@ class _MoodsPageState extends State<MoodsPage> {
 
             // List of emojis
             ListView.builder(
-              itemCount: moodsList.length,
+              itemCount: widget.userMoodsList!.isEmpty
+                  ? moodsList.length
+                  : widget.userMoodsList!.length,
               shrinkWrap: true,
               itemBuilder: (context, index) => Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -44,17 +56,24 @@ class _MoodsPageState extends State<MoodsPage> {
                   InkWell(
                     onTap: () {
                       DatabaseService().addMood(
-                          DatabaseService.currentUser!.uid, moodsList[index]);
+                          DatabaseService.currentUser!.uid,
+                          widget.userMoodsList!.isEmpty
+                              ? moodsList[index]
+                              : widget.userMoodsList![index]);
 
                       Navigator.of(context).pushReplacement(
                         MaterialPageRoute(
-                          builder: (context) =>
-                              MoodStatusPage(mood: moodsList[index]),
+                          builder: (context) => MoodStatusPage(
+                              mood: widget.userMoodsList!.isEmpty
+                                  ? moodsList[index]
+                                  : widget.userMoodsList![index]),
                         ),
                       );
                     },
                     child: Text(
-                      moodsList[index],
+                      widget.userMoodsList!.isEmpty
+                          ? moodsList[index]
+                          : widget.userMoodsList![index],
                       style: const TextStyle(fontSize: 30),
                     ),
                   ),

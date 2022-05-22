@@ -17,4 +17,5 @@ class StringsUtil {
   static const String loginPage = "/LoginPage";
   static const String moodsPage = "/MoodsPage";
   static const String moodStatusPage = "/MoodStatusPage";
+  static const String settingsPage = "/SettingsPage";
 }
