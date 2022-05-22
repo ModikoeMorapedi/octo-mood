@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:octo_mood/services/authentication_service.dart';
+import 'package:octo_mood/services/database_service.dart';
 import 'package:octo_mood/utils/colors_util.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
@@ -56,9 +57,10 @@ class _RegisterPageState extends State<RegisterPage> {
                   onPressed: () async {
                     final response = await AuthenticationService().registration(
                         email: _emailController.text,
-                        password: _passwordController.text,
-                        nickName: _nickNameController.text);
+                        password: _passwordController.text);
                     if (response!.contains("success")) {
+                      DatabaseService()
+                          .createNewUserInFirestore(_nickNameController.text);
                       Navigator.pushNamed(context, StringsUtil.loginPage);
                     }
                     ScaffoldMessenger.of(context).showSnackBar(
