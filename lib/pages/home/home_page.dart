@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:octo_mood/services/database_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:octo_mood/utils/colors_util.dart';
+import 'package:octo_mood/utils/strings_util.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -47,8 +48,12 @@ class HomePage extends StatelessWidget {
                   ),
 
                   //Logout button
-                  const Icon(
-                    Icons.logout_outlined,
+                  IconButton(
+                    onPressed: () {
+                      DatabaseService().signOut();
+                      Navigator.pushNamed(context, StringsUtil.loginPage);
+                    },
+                    icon: const Icon(Icons.logout_outlined),
                     color: ColorsUtil.greenColor,
                   ),
                 ],

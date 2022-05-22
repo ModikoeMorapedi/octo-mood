@@ -23,8 +23,13 @@ class DatabaseService {
 
   Stream<QuerySnapshot> getData() {
     // Get docs from collection reference
+
     final querySnapshot = users.snapshots();
 
     return querySnapshot;
+  }
+
+  void signOut() {
+    _firebaseAuth.signOut();
   }
 }
