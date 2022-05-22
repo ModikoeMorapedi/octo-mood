@@ -4,6 +4,7 @@ import 'package:octo_mood/utils/strings_util.dart';
 
 class AuthenticationService {
   //Registration method used to register new users in the Database
+
   Future<String?> registration(
       {required String? email, required String? password}) async {
     try {
@@ -12,7 +13,7 @@ class AuthenticationService {
         email: email!,
         password: password!,
       );
-      print(userCredential.user);
+      print(userCredential.user!.uid);
       return StringsUtil.success;
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {

@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                       password: _passwordController.text,
                     );
                     if (response!.contains(StringsUtil.success)) {
-                      Navigator.pushNamed(context, StringsUtil.homePage);
+                      Navigator.pushNamed(context, StringsUtil.moodsPage);
                     } else {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(

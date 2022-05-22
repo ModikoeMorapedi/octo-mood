@@ -8,9 +8,13 @@ class StringsUtil {
   static const String pleaseEnterYourEmail = "Please Enter your Email";
   static const String pleaseEnterYourPassword = "Please Enter your Password";
   static const String success = "success";
+  static const String yourMoodTodayIs = "Your mood today is";
+  static const String home = "Home";
 
   //Routes
   static const String homePage = "/HomePage";
   static const String registerPage = "/RegisterPage";
   static const String loginPage = "/LoginPage";
+  static const String moodsPage = "/MoodsPage";
+  static const String moodStatusPage = "/MoodStatusPage";
 }

@@ -2,8 +2,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class DatabaseService {
-  final _firebaseAuth = FirebaseAuth.instance;
-  User? get currentUser => _firebaseAuth.currentUser;
+  CollectionReference users = FirebaseFirestore.instance.collection('moods');
+  static final _firebaseAuth = FirebaseAuth.instance;
+  static User? get currentUser => _firebaseAuth.currentUser;
 
   void createNewUserInFirestore(String? nickName) {
     final CollectionReference<Map<String, dynamic>> newUser =
@@ -14,5 +15,9 @@ class DatabaseService {
       'nickName': nickName,
       'mood': ""
     });
+  }
+
+  Future<void> addMood(String id, String mood) {
+    return users.doc(currentUser!.uid).update({'mood': mood});
   }
 }
