@@ -92,22 +92,39 @@ class _HomePageState extends State<HomePage> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Container(
-                                        margin: const EdgeInsets.only(
-                                            bottom: 3, top: 14),
-                                        child: Text(
-                                          snapshot.data!.docs[index]
-                                                  .get('nickName')
-                                                  .toString()
-                                                  .toUpperCase() +
-                                              " is in a " +
-                                              snapshot.data!.docs[index]
-                                                  .get('mood') +
-                                              " M👀d",
-                                          style: const TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 20),
-                                        ),
-                                      ),
+                                          margin: const EdgeInsets.only(
+                                              bottom: 3, top: 14),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                snapshot.data!.docs[index]
+                                                        .get('nickName')
+                                                        .toString()
+                                                        .toUpperCase() +
+                                                    " is in a " +
+                                                    snapshot.data!.docs[index]
+                                                        .get('mood') +
+                                                    " M👀d",
+                                                style: const TextStyle(
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 20),
+                                              ),
+                                              IconButton(
+                                                  onPressed: (() {
+                                                    DatabaseService()
+                                                        .deleteProfile(snapshot
+                                                            .data!.docs[index]
+                                                            .get('id'));
+                                                  }),
+                                                  icon: Icon(
+                                                      Icons
+                                                          .delete_forever_outlined,
+                                                      color:
+                                                          ColorsUtil.redColor))
+                                            ],
+                                          )),
                                       // Text(
                                       //   snapshot.data!.docs[index].get('mood') +
                                       //       " mood",

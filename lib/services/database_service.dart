@@ -34,7 +34,15 @@ class DatabaseService {
     return querySnapshot;
   }
 
-  void signOut() {
-    _firebaseAuth.signOut();
+  void signOut() async {
+    await _firebaseAuth.signOut();
+  }
+
+  void deleteProfile(String uid) async {
+    if (currentUser!.uid == uid) {
+      await users.doc(currentUser!.uid).delete();
+      await currentUser!.delete();
+      await _firebaseAuth.signOut();
+    }
   }
 }
