@@ -14,7 +14,7 @@ class Routes {
       case StringsUtil.registerPage:
         return MaterialPageRoute(builder: (_) => const RegisterPage());
       case StringsUtil.homePage:
-        return MaterialPageRoute(builder: (_) => const HomePage());
+        return MaterialPageRoute(builder: (_) => HomePage());
       case StringsUtil.moodsPage:
         return MaterialPageRoute(builder: (_) => const MoodsPage());
       case StringsUtil.moodStatusPage:

@@ -39,7 +39,6 @@ class MoodStatusPage extends StatelessWidget {
             ),
             SolidButtonWidget(
                 onPressed: () {
-                  final users = DatabaseService().getData();
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => HomePage(),

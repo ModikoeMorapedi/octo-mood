@@ -4,8 +4,15 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:octo_mood/utils/colors_util.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isDescending = false;
 
   @override
   Widget build(BuildContext context) {
@@ -18,8 +25,17 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   //Sorting Button, sort by Date in ascending and descending order
-                  const Icon(
-                    Icons.arrow_upward_outlined,
+                  IconButton(
+                    onPressed: (() {
+                      setState(() {
+                        if (isDescending == false) {
+                          isDescending = true;
+                        } else {
+                          isDescending = false;
+                        }
+                      });
+                    }),
+                    icon: const Icon(Icons.arrow_upward_outlined),
                     color: ColorsUtil.greenColor,
                   ),
                   //Search bar for searching users by name
@@ -64,7 +80,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                   height: MediaQuery.of(context).size.height - 150,
                   child: StreamBuilder<QuerySnapshot>(
-                      stream: DatabaseService().getData(),
+                      stream: DatabaseService().getData(isDescending),
                       builder: (BuildContext context,
                           AsyncSnapshot<QuerySnapshot> snapshot) {
                         return ListView.builder(

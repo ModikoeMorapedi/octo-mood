@@ -13,7 +13,8 @@ class DatabaseService {
       'id': currentUser!.uid,
       'email': currentUser!.email,
       'nickName': nickName,
-      'mood': ""
+      'mood': "😎 🙃 🥳",
+      'createdAt': FieldValue.serverTimestamp(),
     });
   }
 
@@ -21,10 +22,14 @@ class DatabaseService {
     return users.doc(currentUser!.uid).update({'mood': mood});
   }
 
-  Stream<QuerySnapshot> getData() {
+  Stream<QuerySnapshot> getData([bool? isDescending]) {
     // Get docs from collection reference
 
-    final querySnapshot = users.snapshots();
+    final querySnapshot = users
+        .orderBy('createdAt',
+            descending:
+                isDescending == null || isDescending == false ? false : true)
+        .snapshots();
 
     return querySnapshot;
   }
