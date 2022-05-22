@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "852245870163",
+    "project_id": "otco-mood",
+    "storage_bucket": "otco-mood.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:852245870163:android:574ed4d331914ed29678a6",
+        "android_client_info": {
+          "package_name": "com.example.octo_mood"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "852245870163-kqhaki33681e00fds6tvlfipdp8estag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlshhRU1TIV5jOpJfKdeYJm2mBa5hRV1k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "852245870163-kqhaki33681e00fds6tvlfipdp8estag.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
