@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:octo_mood/pages/home/home_page.dart';
+import 'package:octo_mood/services/database_service.dart';
 import 'package:octo_mood/utils/colors_util.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
@@ -35,7 +37,16 @@ class MoodStatusPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 50),
               ),
             ),
-            SolidButtonWidget(onPressed: () {}, text: StringsUtil.home)
+            SolidButtonWidget(
+                onPressed: () {
+                  final users = DatabaseService().getData();
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                      builder: (context) => HomePage(),
+                    ),
+                  );
+                },
+                text: StringsUtil.home)
           ],
         ),
       ),

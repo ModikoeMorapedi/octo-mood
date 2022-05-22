@@ -20,4 +20,11 @@ class DatabaseService {
   Future<void> addMood(String id, String mood) {
     return users.doc(currentUser!.uid).update({'mood': mood});
   }
+
+  Stream<QuerySnapshot> getData() {
+    // Get docs from collection reference
+    final querySnapshot = users.snapshots();
+
+    return querySnapshot;
+  }
 }
