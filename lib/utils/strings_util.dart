@@ -7,6 +7,7 @@ class StringsUtil {
   static const String pleaseEnterYourNickName = "Please Enter your Nick Name";
   static const String pleaseEnterYourEmail = "Please Enter your Email";
   static const String pleaseEnterYourPassword = "Please Enter your Password";
+  static const String success = "success";
 
   //Routes
   static const String homePage = "/HomePage";

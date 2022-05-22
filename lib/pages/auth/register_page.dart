@@ -58,7 +58,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     final response = await AuthenticationService().registration(
                         email: _emailController.text,
                         password: _passwordController.text);
-                    if (response!.contains("success")) {
+                    if (response!.contains(StringsUtil.success)) {
                       DatabaseService()
                           .createNewUserInFirestore(_nickNameController.text);
                       Navigator.pushNamed(context, StringsUtil.loginPage);

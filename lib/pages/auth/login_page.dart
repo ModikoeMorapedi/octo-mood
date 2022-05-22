@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:octo_mood/services/authentication_service.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
 import 'package:octo_mood/widgets/textfield_widget.dart';
@@ -45,8 +46,20 @@ class _LoginPageState extends State<LoginPage> {
                   height: 80,
                 ),
                 SolidButtonWidget(
-                  onPressed: () {
-                    Navigator.pushNamed(context, StringsUtil.homePage);
+                  onPressed: () async {
+                    final response = await AuthenticationService().login(
+                      email: _emailController.text,
+                      password: _passwordController.text,
+                    );
+                    if (response!.contains(StringsUtil.success)) {
+                      Navigator.pushNamed(context, StringsUtil.homePage);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(response),
+                        ),
+                      );
+                    }
                   },
                   text: StringsUtil.signIn,
                 ),
