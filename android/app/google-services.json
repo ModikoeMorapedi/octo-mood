@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "852245870163-19u8i6nu57o99id8endatkcma1k9eb82.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.octo_mood",
+            "certificate_hash": "196226b6e65192d17b085437f1883ef4fe4ea380"
+          }
+        },
+        {
           "client_id": "852245870163-kqhaki33681e00fds6tvlfipdp8estag.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "852245870163-kqhaki33681e00fds6tvlfipdp8estag.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "852245870163-1e54gsnsb0h3744c6a4lgbefqbsa63qd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.octomood"
+              }
             }
           ]
         }

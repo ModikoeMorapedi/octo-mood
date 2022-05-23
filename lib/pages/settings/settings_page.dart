@@ -90,7 +90,7 @@ class _SettingsPageState extends State<SettingsPage> {
             usersMoodsList.isEmpty
                 ? Container()
                 : SolidButtonWidget(
-                    text: "Add List",
+                    text: "Add to List",
                     onPressed: () {
                       Navigator.push(
                           context,

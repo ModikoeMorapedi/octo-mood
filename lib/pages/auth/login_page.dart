@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:octo_mood/services/authentication_service.dart';
+import 'package:octo_mood/services/database_service.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
 import 'package:octo_mood/widgets/textfield_widget.dart';
@@ -71,7 +72,24 @@ class _LoginPageState extends State<LoginPage> {
                   text: StringsUtil.createAccount,
                 ),
                 const SizedBox(
-                  height: 30,
+                  height: 10,
+                ),
+                SolidButtonWidget(
+                  onPressed: () async {
+                    final response =
+                        await AuthenticationService().signInwithGoogle();
+                    if (response!.isNotEmpty) {
+                      DatabaseService().createNewUserInFirestore(response);
+                      Navigator.pushNamed(context, StringsUtil.moodsPage);
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(response),
+                        ),
+                      );
+                    }
+                  },
+                  text: StringsUtil.googleSignIn,
                 ),
               ],
             )));

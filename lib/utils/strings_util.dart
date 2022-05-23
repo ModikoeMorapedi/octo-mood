@@ -10,6 +10,7 @@ class StringsUtil {
   static const String success = "success";
   static const String yourMoodTodayIs = "Your mood today is";
   static const String home = "Home";
+  static const String googleSignIn = "Google Sign In";
 
   //Routes
   static const String homePage = "/HomePage";

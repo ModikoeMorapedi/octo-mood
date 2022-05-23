@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
                                                     " M👀d",
                                                 style: const TextStyle(
                                                     fontWeight: FontWeight.bold,
-                                                    fontSize: 20),
+                                                    fontSize: 14),
                                               ),
                                               IconButton(
                                                   onPressed: (() {
