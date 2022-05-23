@@ -56,6 +56,7 @@ class AuthenticationService {
     }
   }
 
+  //SingIn with Google method  used for signing with Google account details
   Future<String?> signInwithGoogle() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =

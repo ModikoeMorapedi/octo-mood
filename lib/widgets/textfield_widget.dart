@@ -10,6 +10,7 @@ class TextFormFieldWidget extends StatelessWidget {
   final Color? color;
   final double? width;
   final bool? obscureText;
+  final Color? hintColor;
 
   const TextFormFieldWidget(
       {Key? key,
@@ -17,7 +18,8 @@ class TextFormFieldWidget extends StatelessWidget {
       this.hintText,
       this.color,
       this.width,
-      this.obscureText})
+      this.obscureText,
+      this.hintColor})
       : super(key: key);
 
   @override
@@ -32,6 +34,7 @@ class TextFormFieldWidget extends StatelessWidget {
       ),
       decoration: InputDecoration(
         hintText: hintText,
+        hintStyle: TextStyle(color: hintColor ?? ColorsUtil.blackColor),
         focusedBorder: OutlineInputBorder(
             borderSide: BorderSide(
                 color: color ?? ColorsUtil.blackColor, width: width ?? 1)),

@@ -31,18 +31,7 @@ class _MoodsPageState extends State<MoodsPage> {
         child: Column(
           children: [
             //Header
-            Container(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                  onPressed: (() {
-                    Navigator.pushNamed(context, StringsUtil.settingsPage);
-                  }),
-                  icon: const Icon(
-                    Icons.settings,
-                    color: ColorsUtil.whiteColor,
-                    size: 35,
-                  )),
-            ),
+            headerWidget(context),
             //Body
             bodyWidget(context),
             //Footer
@@ -50,6 +39,21 @@ class _MoodsPageState extends State<MoodsPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget headerWidget(BuildContext context) {
+    return Container(
+      alignment: Alignment.centerRight,
+      child: IconButton(
+          onPressed: (() {
+            Navigator.pushNamed(context, StringsUtil.settingsPage);
+          }),
+          icon: const Icon(
+            Icons.settings,
+            color: ColorsUtil.whiteColor,
+            size: 35,
+          )),
     );
   }
 
@@ -125,9 +129,6 @@ class _MoodsPageState extends State<MoodsPage> {
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => const HomePage(),
-                        // mood: widget.userMoodsList!.isEmpty
-                        //     ? moodsList[index]
-                        //     : widget.userMoodsList![index]
                       ),
                     );
                   },

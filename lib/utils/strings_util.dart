@@ -14,6 +14,17 @@ class StringsUtil {
   static const String octoMoodApp = "Octo Mood App";
   static const String howHowAre = "HOW ARE YOU?";
   static const String today = "Today, ";
+  static const String createMoods = "Create Moods";
+  static const String pleaseEnterYourMood = "Please Enter Your Mood";
+  static const String add = "ADD";
+  static const String sort = "Sort";
+  static const String logout = "logout";
+  static const String searchUsersByName = "Search Users by Name";
+  static const String noDataAvailable = "No data available";
+  static const String id = 'id';
+  static const String mood = 'mood';
+  static const String nickName = 'nickName';
+  static const String isFeeling = " is feeling ";
 
   //Routes
   static const String homePage = "/HomePage";
