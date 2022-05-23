@@ -4,10 +4,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:octo_mood/services/authentication_service.dart';
 import 'package:octo_mood/services/database_service.dart';
 import 'package:octo_mood/utils/colors_util.dart';
-import 'package:octo_mood/utils/sizes_util.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
 import 'package:octo_mood/widgets/textfield_widget.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -58,10 +58,14 @@ class _LoginPageState extends State<LoginPage> {
       padding: const EdgeInsets.only(top: 90, bottom: 30),
       child: Column(
         children: [
-          const Text(
+          Text(
             StringsUtil.signIn + "😎",
-            style: TextStyle(
-                color: Colors.white, fontSize: 40, fontWeight: FontWeight.bold),
+            style: GoogleFonts.lato(
+              textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 40,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             color: ColorsUtil.whiteColor,
@@ -84,6 +88,7 @@ class _LoginPageState extends State<LoginPage> {
           height: 10,
         ),
         TextFormFieldWidget(
+          obscureText: true,
           hintText: StringsUtil.pleaseEnterYourPassword,
           textEditingController: _passwordController,
         ),

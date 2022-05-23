@@ -9,18 +9,21 @@ class TextFormFieldWidget extends StatelessWidget {
   final String? hintText;
   final Color? color;
   final double? width;
+  final bool? obscureText;
 
   const TextFormFieldWidget(
       {Key? key,
       this.textEditingController,
       this.hintText,
       this.color,
-      this.width})
+      this.width,
+      this.obscureText})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      obscureText: obscureText ?? false,
       controller: textEditingController,
       style: TextStyle(
         fontSize: 15,

@@ -7,6 +7,8 @@ import 'package:octo_mood/utils/colors_util.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
 
+import 'package:google_fonts/google_fonts.dart';
+
 import '../../widgets/textfield_widget.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -57,10 +59,14 @@ class _RegisterPageState extends State<RegisterPage> {
       padding: const EdgeInsets.only(top: 90, bottom: 30),
       child: Column(
         children: [
-          const Text(
+          Text(
             StringsUtil.createAccount + "👨‍💻",
-            style: TextStyle(
-                color: Colors.white, fontSize: 34, fontWeight: FontWeight.bold),
+            style: GoogleFonts.lato(
+              textStyle: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 34,
+                  fontWeight: FontWeight.bold),
+            ),
           ),
           Container(
             color: ColorsUtil.whiteColor,
@@ -90,6 +96,7 @@ class _RegisterPageState extends State<RegisterPage> {
           height: 15,
         ),
         TextFormFieldWidget(
+          obscureText: true,
           hintText: StringsUtil.pleaseEnterYourPassword,
           textEditingController: _passwordController,
         ),
