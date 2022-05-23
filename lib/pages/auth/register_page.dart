@@ -23,59 +23,100 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
+        resizeToAvoidBottomInset:
+            false, //avoid overflow when the user enter values on the TextFormField
         body: Container(
-            padding: const EdgeInsets.all(35),
-            color: ColorsUtil.greenColor,
+            color: ColorsUtil.whiteColor,
             child: Column(
               children: [
+                //Header
+                headerWidget(context),
                 Container(
-                  padding: const EdgeInsets.only(top: 50, bottom: 50),
-                  child: const Text(
-                    StringsUtil.createAccount,
-                    style: TextStyle(
-                        color: ColorsUtil.whiteColor,
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold),
+                  padding: const EdgeInsets.only(top: 50, left: 35, right: 35),
+                  width: MediaQuery.of(context).size.width,
+                  color: ColorsUtil.whiteColor,
+                  child: Column(
+                    children: [
+                      //Body
+                      bodyWidget(context),
+                      //Footer
+                      footerWidget(context),
+                    ],
                   ),
-                ),
-                TextFormFieldWidget(
-                  hintText: StringsUtil.pleaseEnterYourNickName,
-                  textEditingController: _nickNameController,
-                ),
-                TextFormFieldWidget(
-                  hintText: StringsUtil.pleaseEnterYourEmail,
-                  textEditingController: _emailController,
-                ),
-                TextFormFieldWidget(
-                  hintText: StringsUtil.pleaseEnterYourPassword,
-                  textEditingController: _passwordController,
-                ),
-                const SizedBox(
-                  height: 80,
-                ),
-                SolidButtonWidget(
-                  onPressed: () async {
-                    final response = await AuthenticationService().registration(
-                        email: _emailController.text,
-                        password: _passwordController.text);
-                    if (response!.contains(StringsUtil.success)) {
-                      DatabaseService()
-                          .createNewUserInFirestore(_nickNameController.text);
-                      Navigator.pushNamed(context, StringsUtil.loginPage);
-                    }
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(response),
-                      ),
-                    );
-                  },
-                  text: StringsUtil.createAccount,
-                ),
-                const SizedBox(
-                  height: 30,
                 ),
               ],
             )));
+  }
+
+  Widget headerWidget(BuildContext context) {
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.center,
+      height: 250,
+      color: ColorsUtil.greenColor,
+      padding: const EdgeInsets.only(top: 90, bottom: 30),
+      child: Column(
+        children: [
+          const Text(
+            StringsUtil.createAccount + "👨‍💻",
+            style: TextStyle(
+                color: Colors.white, fontSize: 34, fontWeight: FontWeight.bold),
+          ),
+          Container(
+            color: ColorsUtil.whiteColor,
+            width: 275,
+            height: 4,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget bodyWidget(BuildContext context) {
+    return Column(
+      children: [
+        TextFormFieldWidget(
+          hintText: StringsUtil.pleaseEnterYourNickName,
+          textEditingController: _nickNameController,
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        TextFormFieldWidget(
+          hintText: StringsUtil.pleaseEnterYourEmail,
+          textEditingController: _emailController,
+        ),
+        const SizedBox(
+          height: 15,
+        ),
+        TextFormFieldWidget(
+          hintText: StringsUtil.pleaseEnterYourPassword,
+          textEditingController: _passwordController,
+        ),
+        const SizedBox(
+          height: 80,
+        ),
+      ],
+    );
+  }
+
+  Widget footerWidget(BuildContext context) {
+    return SolidButtonWidget(
+      onPressed: () async {
+        final response = await AuthenticationService().registration(
+            email: _emailController.text, password: _passwordController.text);
+        if (response!.contains(StringsUtil.success)) {
+          DatabaseService().createNewUserInFirestore(_nickNameController.text);
+          Navigator.pushNamed(context, StringsUtil.loginPage);
+        }
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text(response),
+          ),
+        );
+      },
+      text: StringsUtil.createAccount,
+      width: MediaQuery.of(context).size.width,
+    );
   }
 }
