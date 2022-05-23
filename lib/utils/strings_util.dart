@@ -12,6 +12,8 @@ class StringsUtil {
   static const String home = "Home";
   static const String googleSignIn = "Google Sign In";
   static const String octoMoodApp = "Octo Mood App";
+  static const String howHowAre = "HOW ARE YOU?";
+  static const String today = "Today, ";
 
   //Routes
   static const String homePage = "/HomePage";

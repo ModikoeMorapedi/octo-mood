@@ -4,8 +4,10 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:octo_mood/services/authentication_service.dart';
 import 'package:octo_mood/services/database_service.dart';
 import 'package:octo_mood/utils/colors_util.dart';
+import 'package:octo_mood/utils/images_util.dart';
 import 'package:octo_mood/utils/strings_util.dart';
 import 'package:octo_mood/widgets/button_widget.dart';
+import 'package:octo_mood/widgets/loading_widget.dart';
 import 'package:octo_mood/widgets/textfield_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -19,34 +21,37 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset:
-          false, //avoid overflow when the user enter values on the TextFormField
-      body: Container(
-        color: ColorsUtil.whiteColor,
-        child: Column(
-          children: [
-            //Header
-            headerWidget(context),
-            Container(
-              padding: const EdgeInsets.only(top: 50, left: 35, right: 35),
-              width: MediaQuery.of(context).size.width,
-              color: ColorsUtil.whiteColor,
-              child: Column(
-                children: [
-                  //Body
-                  bodyWidget(context),
-                  //Footer
-                  footerWidget(context),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
+        resizeToAvoidBottomInset:
+            false, //avoid overflow when the user enter values on the TextFormField
+        body: isLoading == false
+            ? Container(
+                color: ColorsUtil.whiteColor,
+                child: Column(
+                  children: [
+                    //Header
+                    headerWidget(context),
+                    Container(
+                      padding:
+                          const EdgeInsets.only(top: 50, left: 35, right: 35),
+                      width: MediaQuery.of(context).size.width,
+                      color: ColorsUtil.whiteColor,
+                      child: Column(
+                        children: [
+                          //Body
+                          bodyWidget(context),
+                          //Footer
+                          footerWidget(context),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : const LoadingWidget());
   }
 
   Widget headerWidget(BuildContext context) {
@@ -104,13 +109,22 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         SolidButtonWidget(
           onPressed: () async {
+            setState(() {
+              isLoading = true;
+            });
             final response = await AuthenticationService().login(
               email: _emailController.text,
               password: _passwordController.text,
             );
             if (response!.contains(StringsUtil.success)) {
               Navigator.pushNamed(context, StringsUtil.moodsPage);
+              setState(() {
+                isLoading = false;
+              });
             } else {
+              setState(() {
+                isLoading = false;
+              });
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(response),
