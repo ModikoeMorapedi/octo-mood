@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/services.dart';
 import 'package:octo_mood/pages/splash/splash_page.dart';
 import 'package:octo_mood/utils/helper/sizeConfig.dart';
 import 'package:octo_mood/utils/routes_util.dart';
@@ -8,6 +9,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp();
+
+  //Disable rotation the App will only show in Protrait mode
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
   runApp(const MyApp());
 }

@@ -33,7 +33,6 @@ class DatabaseService {
             descending:
                 isDescending == null || isDescending == false ? false : true)
         .snapshots();
-
     return querySnapshot;
   }
 
