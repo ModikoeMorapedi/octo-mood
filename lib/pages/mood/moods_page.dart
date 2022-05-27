@@ -10,7 +10,7 @@ import 'package:octo_mood/utils/strings_util.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class MoodsPage extends StatefulWidget {
-  final String? id;
+  String? id = "";
   List<String>? userMoodsList = [];
   MoodsPage({Key? key, this.id, this.userMoodsList}) : super(key: key);
 
@@ -62,7 +62,7 @@ class _MoodsPageState extends State<MoodsPage> {
       children: [
         Center(
           child: Text(
-            StringsUtil.howHowAre,
+            widget.id == null ? StringsUtil.howHowAre : "You are changing",
             style: GoogleFonts.lato(
               textStyle: const TextStyle(
                   color: ColorsUtil.whiteColor,
@@ -121,16 +121,26 @@ class _MoodsPageState extends State<MoodsPage> {
               InkWell(
                   onTap: () {
                     DatabaseService().addMood(
-                        DatabaseService.currentUser!.uid,
+                        widget.id == null
+                            ? DatabaseService.currentUser!.uid
+                            : widget.id!,
                         widget.userMoodsList!.isEmpty
                             ? moodsList[index]
                             : widget.userMoodsList![index]);
-
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const HomePage(),
-                      ),
-                    );
+                    if (widget.id != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => HomePage(
+                              isEdited: true,
+                              userNewMood: widget.userMoodsList!.isEmpty
+                                  ? moodsList[index]
+                                  : widget.userMoodsList![index])),
+                        ),
+                      );
+                    } else {
+                      Navigator.pushNamed(context, StringsUtil.homePage);
+                    }
                   },
                   child: Row(children: [
                     const Icon(
